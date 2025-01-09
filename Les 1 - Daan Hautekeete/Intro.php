@@ -33,10 +33,12 @@ width: 1080px;
     <?php
       // Variabele
       $mijnnaam = "Hautekeete Daan";
+			$boodschap = "Dit is een heel nieuwe manier van websites maken!";
 
       echo "<p>Hello world</p>";
       echo "<p>Ik ben $mijnnaam</p>";
       echo '<p>Ik ben '.$mijnnaam.'!</p>';
+			echo  "<p>Dit heb ik te zeggen: $boodschap <p>";
     ?>
   </main>
 	<footer>&nbsp;</footer>
