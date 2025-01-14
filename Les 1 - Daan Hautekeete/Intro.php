@@ -31,7 +31,7 @@ width: 1080px;
 	<main>
     <!-- php code -->
     <?php
-			//array maken (normaal)
+			//array maken (numeriek)
 			//$leerlingen = array("Lobke", "Simon", "Emma", "Alexander", "Daan", "Aaron", "Pahul", "Tuur", "Stan", "Luka");
 
 			//array maken (associatief)
@@ -49,9 +49,21 @@ width: 1080px;
 
 			//array overlopen met foreach
 			foreach ($leerlingen as $leerling=>$gemeente) {
-				echo "<p>$leerling : $gemeente";
+				echo "<p>$leerling: $gemeente </p>";
 			}
     ?>
+
+		<form	name="Woonplaats" method="Post">
+			<p>
+				<select name="cboLeerlingen">
+					<?php
+						foreach ($leerlingen as $leerling=>$gemeente) {
+							echo "<option>$leerling</option>";
+						}
+					?>
+				</select>
+			</p>
+		</form>
   </main>
 	<footer>&nbsp;</footer>
 </div>
