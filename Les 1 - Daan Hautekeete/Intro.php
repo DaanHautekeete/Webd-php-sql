@@ -8,7 +8,12 @@
 	$gekozenLeerling = $_POST['cboLeerlingen'];
 	$gekozenGemeente = $leerlingen[$gekozenLeerling];
 
-	$output = "<p>$gekozenLeerling woont in $gekozenGemeente</p>";
+	$output = "<p>$gekozenLeerling woont in $gekozenGemeente.</p>";
+
+	//opbouw keuzelijst
+	foreach ($leerlingen as $leerling=>$gemeente) {
+		$combo .= "<option>$leerling</option>\n";
+	}
 ?>
 
 <!doctype html>
@@ -57,9 +62,7 @@ width: 1080px;
 				<select name="cboLeerlingen">
 					<!-- code om alle opties toe te voegen in de select -->
 					<?php
-						foreach ($leerlingen as $leerling=>$gemeente) {
-							echo "<option>$leerling</option>\n";
-						}
+						echo $combo;
 					?>
 				</select> <input type="submit" name="btnVerstuur" value="Toon gemeente">
 			</p>
@@ -68,6 +71,7 @@ width: 1080px;
 		<!-- Code om output weer te geven -->
 		<?php
 			echo $output;
+			
 		?>
   </main>
 	<footer>&nbsp;</footer>
