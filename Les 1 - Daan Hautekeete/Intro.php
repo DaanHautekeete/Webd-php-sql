@@ -31,15 +31,20 @@ width: 1080px;
 	<main>
     <!-- php code -->
     <?php
-			//array maken
-			$leerlingen = array("Lobke", "Simon", "Emma", "Alexander", "Daan", "Aaron", "Pahul", "Tuur", "Stan", "Luka");
-			echo "<p>De eerste leerling in de lijst is: $leerlingen[0]";
+			//array maken (normaal)
+			//$leerlingen = array("Lobke", "Simon", "Emma", "Alexander", "Daan", "Aaron", "Pahul", "Tuur", "Stan", "Luka");
+
+			//array maken (associatief)
+			$leerlingen = array("Lobke" => "Oostkamp", "Simon" => "Oostkamp", "Emma" => "Brugge", "Alexander" => "Beernem");
+			
+			// echo "<p>De eerste leerling in de lijst is: $leerlingen[0]";
  
 			//lijst met leerlingen uit de array halen met een for loop
-			for($i=0; $i < count($leerlingen); $i++) {
-				echo "<p> $leerlingen[$i]</p>";
-			}
+			// for($i=0; $i < count($leerlingen); $i++) {
+			// 	echo "<p> $leerlingen[$i]</p>";
+			// }
 
+			echo "<p>$leerlingen[Lobke]</p>";
     ?>
   </main>
 	<footer>&nbsp;</footer>
