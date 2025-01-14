@@ -35,8 +35,9 @@ width: 1080px;
 			//$leerlingen = array("Lobke", "Simon", "Emma", "Alexander", "Daan", "Aaron", "Pahul", "Tuur", "Stan", "Luka");
 
 			//array maken (associatief)
+			// Lobke = key, Oostkamp = value
 			$leerlingen = array("Lobke" => "Oostkamp", "Simon" => "Oostkamp", "Emma" => "Brugge", "Alexander" => "Beernem");
-			
+
 			// echo "<p>De eerste leerling in de lijst is: $leerlingen[0]";
  
 			//lijst met leerlingen uit de array halen met een for loop
@@ -45,6 +46,11 @@ width: 1080px;
 			// }
 
 			echo "<p>$leerlingen[Lobke]</p>";
+
+			//array overlopen met foreach
+			foreach ($leerlingen as $leerling=>$gemeente) {
+				echo "<p>$leerling : $gemeente";
+			}
     ?>
   </main>
 	<footer>&nbsp;</footer>
