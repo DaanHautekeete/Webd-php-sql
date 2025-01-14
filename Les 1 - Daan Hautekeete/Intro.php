@@ -31,14 +31,15 @@ width: 1080px;
 	<main>
     <!-- php code -->
     <?php
-      // Variabele
-      $mijnnaam = "Hautekeete Daan";
-			$boodschap = "Dit is een heel nieuwe manier van websites maken!";
+			//array maken
+			$leerlingen = array("Lobke", "Simon", "Emma", "Alexander", "Daan", "Aaron", "Pahul", "Tuur", "Stan", "Luka");
+			echo "<p>De eerste leerling in de lijst is: $leerlingen[0]";
+ 
+			//lijst met leerlingen uit de array halen met een for loop
+			for($i=0; $i < count($leerlingen); $i++) {
+				echo "<p> $leerlingen[$i]</p>";
+			}
 
-      echo "<p>Hello world</p>";
-      echo "<p>Ik ben $mijnnaam</p>";
-      echo '<p>Ik ben '.$mijnnaam.'!</p>';
-			echo  "<p>Dit heb ik te zeggen: $boodschap <p>";
     ?>
   </main>
 	<footer>&nbsp;</footer>
