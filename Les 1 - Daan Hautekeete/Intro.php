@@ -1,3 +1,16 @@
+<?php
+	// Ophalen waarden uit verstuurde formulier
+
+	//array maken (associatief)
+	// Lobke = key, Oostkamp = value
+	$leerlingen = array("Lobke" => "Oostkamp", "Simon" => "Oostkamp", "Emma" => "Brugge", "Alexander" => "Beernem");
+
+	$gekozenLeerling = $_POST['cboLeerlingen'];
+	$gekozenGemeente = $leerlingen[$gekozenLeerling];
+
+	$output = "<p>$gekozenLeerling woont in $gekozenGemeente</p>";
+?>
+
 <!doctype html>
 <html>
 <head>
@@ -31,20 +44,6 @@ width: 1080px;
 	<main>
     <!-- php code -->
     <?php
-			//array maken (numeriek)
-			//$leerlingen = array("Lobke", "Simon", "Emma", "Alexander", "Daan", "Aaron", "Pahul", "Tuur", "Stan", "Luka");
-
-			//array maken (associatief)
-			// Lobke = key, Oostkamp = value
-			$leerlingen = array("Lobke" => "Oostkamp", "Simon" => "Oostkamp", "Emma" => "Brugge", "Alexander" => "Beernem");
-
-			// echo "<p>De eerste leerling in de lijst is: $leerlingen[0]";
- 
-			//lijst met leerlingen uit de array halen met een for loop
-			// for($i=0; $i < count($leerlingen); $i++) {
-			// 	echo "<p> $leerlingen[$i]</p>";
-			// }
-
 			echo "<p>$leerlingen[Lobke]</p>";
 
 			//array overlopen met foreach
@@ -56,14 +55,20 @@ width: 1080px;
 		<form	name="Woonplaats" method="Post">
 			<p>
 				<select name="cboLeerlingen">
+					<!-- code om alle opties toe te voegen in de select -->
 					<?php
 						foreach ($leerlingen as $leerling=>$gemeente) {
-							echo "<option>$leerling</option>";
+							echo "<option>$leerling</option>\n";
 						}
 					?>
-				</select>
+				</select> <input type="submit" name="btnVerstuur" value="Toon gemeente">
 			</p>
 		</form>
+
+		<!-- Code om output weer te geven -->
+		<?php
+			echo $output;
+		?>
   </main>
 	<footer>&nbsp;</footer>
 </div>
