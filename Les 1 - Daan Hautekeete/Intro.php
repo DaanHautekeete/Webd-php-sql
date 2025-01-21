@@ -12,7 +12,20 @@
 
 	//opbouw keuzelijst
 	foreach ($leerlingen as $leerling=>$gemeente) {
-		$combo .= "<option>$leerling</option>\n";
+	// Dit kan ook, maar er is hier soort van dubbele code
+	// 	if($leerling == $gekozenLeerling) {
+	// 		$combo .= "<option selected>$leerling</option>\n";
+	// 	}
+	// 	else {
+	// 		$combo .= "<option>$leerling</option>\n";
+	// 	}
+	// }
+		
+		$combo .= "<option";
+		if($leerling == $gekozenLeerling) {
+			$combo .= " selected";
+		}
+		$combo .= ">$leerling</option>\n";
 	}
 ?>
 
@@ -71,7 +84,6 @@ width: 1080px;
 		<!-- Code om output weer te geven -->
 		<?php
 			echo $output;
-			
 		?>
   </main>
 	<footer>&nbsp;</footer>
