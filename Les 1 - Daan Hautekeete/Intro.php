@@ -7,8 +7,8 @@
 
 	$show = "form";
 
-	// Als de knop is ingedrukt
-	if (isset($_POST['btnVerstuur'])) {
+	// Als de keuzelijst in de server staat
+	if (isset($_POST['cboLeerlingen'])) {
 
 		$gekozenLeerling = $_POST['cboLeerlingen'];
 		$gekozenGemeente = $leerlingen[$gekozenLeerling];
@@ -74,14 +74,16 @@ width: 1080px;
 			{
 		?>
 		
-		<form	name="Woonplaats" method="Post">
+		<form	name="frmWoonplaats" method="Post">
 			<p>
-				<select name="cboLeerlingen">
+				<select name="cboLeerlingen" onchange="document.frmWoonplaats.submit()">
+					<!-- Standaardwaarde invoegen -->
+					<option>Kies een leerling</option>
 					<!-- code om alle opties toe te voegen in de select -->
 					<?php
 						echo $combo;
 					?>
-				</select> <input type="submit" name="btnVerstuur" value="Toon gemeente">
+				</select>
 			</p>
 		</form>
 
