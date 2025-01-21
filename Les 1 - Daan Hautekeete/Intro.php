@@ -5,10 +5,18 @@
 	// Lobke = key, Oostkamp = value
 	$leerlingen = array("Lobke" => "Oostkamp", "Simon" => "Oostkamp", "Emma" => "Brugge", "Alexander" => "Beernem");
 
-	$gekozenLeerling = $_POST['cboLeerlingen'];
-	$gekozenGemeente = $leerlingen[$gekozenLeerling];
+	$show = "form";
 
-	$output = "<p>$gekozenLeerling woont in $gekozenGemeente.</p>";
+	// Als de knop is ingedrukt
+	if (isset($_POST['btnVerstuur'])) {
+
+		$gekozenLeerling = $_POST['cboLeerlingen'];
+		$gekozenGemeente = $leerlingen[$gekozenLeerling];
+
+		$output = "<p>$gekozenLeerling woont in $gekozenGemeente.</p>";
+
+		$show = "output";
+	}
 
 	//opbouw keuzelijst
 	foreach ($leerlingen as $leerling=>$gemeente) {
@@ -60,16 +68,12 @@ width: 1080px;
 <div id="wrapper">
 	<header><img src="images/banner.jpg" width="100%"  alt=""/></header>
 	<main>
-    <!-- php code -->
-    <?php
-			echo "<p>$leerlingen[Lobke]</p>";
 
-			//array overlopen met foreach
-			foreach ($leerlingen as $leerling=>$gemeente) {
-				echo "<p>$leerling: $gemeente </p>";
-			}
-    ?>
-
+		<?php
+			if($show == "form")
+			{
+		?>
+		
 		<form	name="Woonplaats" method="Post">
 			<p>
 				<select name="cboLeerlingen">
@@ -82,8 +86,13 @@ width: 1080px;
 		</form>
 
 		<!-- Code om output weer te geven -->
+		
 		<?php
-			echo $output;
+		// We sluiten de if van erboven af
+			}
+			else {
+				echo $output;
+			}
 		?>
   </main>
 	<footer>&nbsp;</footer>
