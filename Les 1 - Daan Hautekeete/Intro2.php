@@ -13,9 +13,20 @@
     }
     else {
       $gekozenFoto = $leerlingen[$gekozenLeerling];
-      $output = "<p>Gekozen leerling: $leerlingNaam.</p>
-      <p>Klas van leerling: $klasLeerling.</p>
-      <br><img src='fotosSJZ/$gekozenFoto.jpg' alt='foto van $gekozenLeerling'>";
+
+      //controleren welke klas het is
+      if($klasLeerling == "6BI")
+      {
+        $output .= "<div class='klas1'><p>Gekozen leerling: $leerlingNaam.</p>
+        <p>Klas van leerling: $klasLeerling.</p>
+        <br><img src='fotosSJZ/$gekozenFoto.jpg' alt='foto van $gekozenLeerling'></div>";
+      }
+      elseif ($klasLeerling == "6AD") {
+        $output .= "<div class='klas2'><p>Gekozen leerling: $leerlingNaam.</p>
+        <p>Klas van leerling: $klasLeerling.</p>
+        <br><img src='fotosSJZ/$gekozenFoto.jpg' alt='foto van $gekozenLeerling'></div>";
+      }
+      
     }
   }
 
@@ -54,6 +65,15 @@
 	min-height: 20em;
 	padding: 1em;
 	}
+
+  .klas1 {
+    border: 1px solid red;
+  }
+
+  .klas2 {
+    border: 1px solid green;
+  }
+
 	footer {
 	height: 0.5em;
 	background-color: #0070C0;
