@@ -1,3 +1,27 @@
+<?php
+//controleren of het formulier verzonden is
+if(isset($_POST["btnResultaat"])) {
+	//de ingevulde gegevens ophalen
+	$letter = $_POST["txtLetter"];
+	$woord = $_POST["txtWoord"];
+
+	//controleren of de velden ingevuld zijn
+	if(empty($letter) || empty($woord)) {
+		$output = "<p>U moet een letter en een woord invullen</p>";
+	} else {
+		//controleren of de letter in het woord voorkomt
+		if(strpos($woord, $letter) === false) {
+			$output = "<p>De letter <strong>$letter</strong> komt niet voor in het woord <strong>$woord</strong></p>";
+		} else {
+			$output = "<p>De letter <strong>$letter</strong> komt ". substr_count($woord, $letter) ." voor in het woord <strong>$woord</strong></p>";
+		}
+
+		//text van textvakken aanpassen aan de ingevulde waarden 
+	}
+}
+?>
+
+
 <!doctype html>
 <html>
 <head>
@@ -53,11 +77,11 @@ font-size: 1.3em;
 <table width="100%"  border="0">
   <tr>
     <td>Letter of teken</td>
-    <td><input name="txtLetter" type="text" id="txtLetter" size="2" /></td>
+    <td><input name="txtLetter" type="text" id="txtLetter" size="2"/></td>
   </tr>
   <tr>
     <td>in woord</td>
-    <td><input name="txtWoord" type="text" id="txtWoord" maxlength="30" /></td>
+    <td><input name="txtWoord" type="text" id="txtWoord" maxlength="30"/></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -65,6 +89,9 @@ font-size: 1.3em;
   </tr>
 </table>
 </form>
+	<?php
+		echo $output;
+	?>
     </main>
 	<footer>&nbsp;</footer>
 </div>
