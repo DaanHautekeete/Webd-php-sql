@@ -4,13 +4,18 @@
   //als er een leerling gekozen is
   if(isset($_POST['cboLeerlingen'])) {
     $gekozenLeerling = $_POST['cboLeerlingen'];
+    $leerlingNaam = substr($gekozenLeerling, 0, strpos($gekozenLeerling, "_"));
+    $klasLeerling = substr($gekozenLeerling, strpos($gekozenLeerling, "_") + 1);
+
     //als de eerste optie (geen leerling) gekozen is
     if ($gekozenLeerling == "0") {
       $output = "<p>Er is geen leerling gekozen.</p>";
     }
     else {
       $gekozenFoto = $leerlingen[$gekozenLeerling];
-      $output = "<p>Gekozen leerling $gekozenLeerling.</p><br><img src='fotosSJZ/$gekozenFoto.jpg' alt='foto van $gekozenLeerling'>";
+      $output = "<p>Gekozen leerling: $leerlingNaam.</p>
+      <p>Klas van leerling: $klasLeerling.</p>
+      <br><img src='fotosSJZ/$gekozenFoto.jpg' alt='foto van $gekozenLeerling'>";
     }
   }
 
