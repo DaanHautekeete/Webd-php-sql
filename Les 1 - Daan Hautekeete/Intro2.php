@@ -1,31 +1,32 @@
 <?php
   $leerlingen=array("Lobke Bonte_6BI"=>"BonteLobke","Simon Declerck_6BI"=>"DeclerckSimon","Emma Devolder_6BI"=>"DevolderEmma","Alexander Dossche_6BI"=>"DosscheAlexander","Daan Hautekeete_6BI"=>"HautekeeteDaan","Aaron Injon_6BI"=>"InjonAaron","Pahul Malhi_6BI"=>"MalhiPahul","Tuur Mispelaere_6BI"=>"MispelaereTuur","Stan Tanghe_6BI"=>"TangheStan","Luka Verbrugghe_6BI"=>"VerbruggheLuka", "Milo Claessens Pillen_6AD"=>"ClaessensPillenMilo","Celestin De Marez_6AD"=>"DeMarezCelestin","Senna Devolder_6AD"=>"DevolderSenna","Gilles Longueville_6AD"=>"LonguevilleGilles","Hugo Popelier_6AD"=>"PopelierHugo","Joshua Radford_6AD"=>"RadfordJoshua","Arthur Roets_6AD"=>"RoetsArthur","Julian Stoops_6AD"=>"StoopsJulian","Maxim Van Belle_6AD"=>"VanBelleMaxim","Bouke Vandenbussche_6AD"=>"VandenbusscheBouke","Sem Van Eenoge_6AD"=>"VanEenogeSem");
 
-  //var maken als er een leerling gekozen is
-  $leerlingGekozen = false;
-
-
   //als er een leerling gekozen is
   if(isset($_POST['cboLeerlingen'])) {
     $gekozenLeerling = $_POST['cboLeerlingen'];
-    $gekozenFoto = $leerlingen[$gekozenLeerling];
-    $output = "<p>Gekozen leerling $gekozenLeerling.</p><br><img src='fotosSJZ/$gekozenFoto.jpg' alt='foto van $gekozenLeerling'>";
-    $leerlingGekozen = true;
+    //als de eerste optie (geen leerling) gekozen is
+    if ($gekozenLeerling == "0") {
+      $output = "<p>Er is geen leerling gekozen.</p>";
+    }
+    else {
+      $gekozenFoto = $leerlingen[$gekozenLeerling];
+      $output = "<p>Gekozen leerling $gekozenLeerling.</p><br><img src='fotosSJZ/$gekozenFoto.jpg' alt='foto van $gekozenLeerling'>";
+    }
   }
 
   //array in de lijst steken
   foreach($leerlingen as $leerling=>$foto) {
     //naam uit de leerling halen - strpos = positie van de underscore
     $leerlingNaam = substr($leerling, 0, strpos($leerling, "_"));
-    $combo .= "<option";
+    $combo .= "<option value='$leerling'";
+
     //kijken als de leerling de gekozen leerling is
     if($leerling == $gekozenLeerling) {
       $combo .= " selected";
     }
+
     $combo .= ">$leerlingNaam</option>\n";
   }
-
-
 ?>
 
 <!doctype html>
@@ -62,17 +63,15 @@
     <form name="frmLeerling" method="Post">
 
       <select name="cboLeerlingen" onchange="document.frmLeerling.submit()">
-        <option>Kies een leerling</option>
+        <option value="0">Kies een leerling</option>
         <?php
-        echo $combo;
+          echo $combo;
         ?>
       </select>
     </form>
 
     <?php
-    if($leerlingGekozen) {
       echo $output;
-    }
     ?>
   </main>
 	<footer>&nbsp;</footer>
