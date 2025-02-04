@@ -15,8 +15,6 @@ if(isset($_POST["btnResultaat"])) {
 		} else {
 			$output = "<p>De letter <strong>$letter</strong> komt ". substr_count($woord, $letter) ." voor in het woord <strong>$woord</strong></p>";
 		}
-
-		//text van textvakken aanpassen aan de ingevulde waarden 
 	}
 }
 ?>
@@ -77,11 +75,12 @@ font-size: 1.3em;
 <table width="100%"  border="0">
   <tr>
     <td>Letter of teken</td>
-    <td><input name="txtLetter" type="text" id="txtLetter" size="2"/></td>
+    <td><input name="txtLetter" value='<?php echo $letter ?>' type="text" id="txtLetter" size="2"/></td>
   </tr>
   <tr>
     <td>in woord</td>
-    <td><input name="txtWoord" type="text" id="txtWoord" maxlength="30"/></td>
+    <td><input name="txtWoord" 
+		value='<?php echo $woord ?>' type="text" id="txtWoord" maxlength="30"/></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
