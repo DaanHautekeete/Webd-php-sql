@@ -1,3 +1,57 @@
+<?php
+//array maken met alle maanden
+$maanden = array("januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december");
+
+
+//als het formulier verzonden is
+if(isset($_POST["btnResultaat"])) {
+  $gekozennaam = $_POST["txtNaam"];
+  $gekozendag = $_POST["Dag"];
+  $gekozenmaand = $_POST["Maand"];
+  $gekozenjaar = $_POST["Jaar"];
+  
+  $output = "$gekozennaam is geboren op $gekozendag $gekozenmaand $gekozenjaar";
+}
+
+//Keuzelijst dag vullen met waarden
+$vulDagen = "";
+
+for($i=1; $i<=31; $i++){
+  if($i == $gekozendag) {
+    $vulDagen .= "<option selected>$i</option>";
+  }
+  else {
+    $vulDagen .= "<option>$i</option>";
+  }
+}
+
+//Keuzelijst maand vullen met waarden
+$vulMaanden = "";
+foreach($maanden as $maand) {
+  if($maand == $gekozenmaand) {
+    $vulMaanden .= "<option selected>$maand</option>";
+  }
+  else {
+    $vulMaanden .= "<option>$maand</option>";
+  }
+}
+
+//keuzelijst jaar vullen met waarden
+$vulJaar = "";
+
+for($jaar=1920; $jaar<= (date("Y") - 6); $jaar++){
+  if($jaar == $gekozenjaar) {
+    $vulJaar .= "<option selected>$jaar</option>";
+  }
+  else {
+    $vulJaar .= "<option>$jaar</option>";
+  }
+}
+
+
+
+?>
+
 <!doctype html>
 <html>
 <head>
@@ -51,7 +105,7 @@ font-size: 1.3em;
 <table width="100%"  border="0">
   <tr>
     <td width="30%">Mijn naam</td>
-    <td><input name="txtNaam" type="text" /></td>
+    <td><input name="txtNaam" type="text" value='<?php echo $gekozennaam ?>'/></td>
   </tr>
   <tr>
     <td width="30%">Mijn geboortedatum</td>
@@ -62,9 +116,21 @@ font-size: 1.3em;
     <td>Jaar</td>
   </tr>
   <tr>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td>
+      <select name="Dag">
+        <?php echo $vulDagen; ?>
+      </select>
+    </td>
+    <td>
+      <select name="Maand" >
+        <?php echo $vulMaanden; ?>
+      </select>
+    </td>
+    <td>
+      <select name="Jaar" >
+        <?php echo $vulJaar; ?>
+      </select>
+    </td>
   </tr>
 </table>
 </td>
@@ -78,7 +144,9 @@ font-size: 1.3em;
 
 
 </form>
-    
+    <?php 
+    echo $output;
+    ?>
     </main>
 	<footer>&nbsp;</footer>
 </div>
