@@ -10,7 +10,7 @@ if(isset($_POST["btnResultaat"])) {
   $gekozenmaand = $_POST["Maand"];
   $gekozenjaar = $_POST["Jaar"];
   
-  $output = "$gekozennaam is geboren op $gekozendag $gekozenmaand $gekozenjaar";
+  $output = "$gekozennaam is geboren op $gekozendag $gekozenmaand $gekozenjaar<br>Notatie NBN: $gekozenjaar-$gekozenmaand-$gekozendag";
 }
 
 //Keuzelijst dag vullen met waarden
