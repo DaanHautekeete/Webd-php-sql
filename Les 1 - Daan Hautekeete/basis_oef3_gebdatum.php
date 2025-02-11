@@ -1,7 +1,6 @@
 <?php
 //array maken met alle maanden
-$maanden = array("januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december");
-
+$maanden = array("Maand", "januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december");
 
 //als het formulier verzonden is
 if(isset($_POST["btnResultaat"])) {
@@ -9,47 +8,62 @@ if(isset($_POST["btnResultaat"])) {
   $gekozendag = $_POST["Dag"];
   $gekozenmaand = $_POST["Maand"];
   $gekozenjaar = $_POST["Jaar"];
+
+  //berekening van aantal dagen in de maand
+
+  switch($gekozenmaand) {
+    case 2:
+      if($gekozenjaar%400 == 0){$aantalDag = 29;}
+      elseif($gekozenjaar%100 == 0) {$aantalDag = 28;}
+      elseif($gekozenjaar%4 == 0){$aantalDag = 29;}
+      else{$aantalDag = 28;}
+      break;
+    
+    case 4:
+    case 6:
+    case 9:
+    case 11:
+      $aantalDag = 30;
+      break;
+
+    default:
+      $aantalDag = 31;
+
+  }
+
+  //Output
+  $gebdatvol = $gekozendag." ".$maanden[$gekozenmaand]." ".$gekozenjaar;
   
-  $output = "$gekozennaam is geboren op $gekozendag $gekozenmaand $gekozenjaar<br>Notatie NBN: $gekozenjaar-$gekozenmaand-$gekozendag";
+  $datNBN = "$gekozenjaar-";
+
+  if($gekozenmaand < 10) {
+    $datNBN.= "0";
+  }
+
+  $datNBN.="$gekozenmaand-";
+
+  if($gekozendag < 10) {
+    $datNBN.= "0";
+  }
+
+  $datNBN.="$gekozendag";
+
+
+  $output = " Beste $gekozennaam, u bent geboren op $gebdatvol <br>Notatie NBN: $datNBN";
 }
 
 //Keuzelijst dag vullen met waarden
 $vulDagen = "";
+$aantalDag = 31;
 
-for($i=1; $i<=31; $i++){
+for($i=1; $i<=$aantalDag; $i++){
   if($i == $gekozendag) {
-    $vulDagen .= "<option selected>$i</option>";
+    $vulDagen .= "<option selected>$i</option>\n";
   }
   else {
-    $vulDagen .= "<option>$i</option>";
+    $vulDagen .= "<option>$i</option>\n";
   }
 }
-
-//Keuzelijst maand vullen met waarden
-$vulMaanden = "";
-foreach($maanden as $maand) {
-  if($maand == $gekozenmaand) {
-    $vulMaanden .= "<option selected>$maand</option>";
-  }
-  else {
-    $vulMaanden .= "<option>$maand</option>";
-  }
-}
-
-//keuzelijst jaar vullen met waarden
-$vulJaar = "";
-
-for($jaar=1920; $jaar<= (date("Y") - 6); $jaar++){
-  if($jaar == $gekozenjaar) {
-    $vulJaar .= "<option selected>$jaar</option>";
-  }
-  else {
-    $vulJaar .= "<option>$jaar</option>";
-  }
-}
-
-
-
 ?>
 
 <!doctype html>
@@ -122,13 +136,29 @@ font-size: 1.3em;
       </select>
     </td>
     <td>
-      <select name="Maand" >
-        <?php echo $vulMaanden; ?>
+      <select name="Maand" onchange="document.frmgebdat.submit()">
+        <?php 
+        for($i = 1; $i <= 12; $i++) {
+        
+          echo "<option value='$i'";
+        
+          if($i == $gekozenmaand) {
+            echo " selected";
+          }
+
+          echo ">$maanden[$i]</option>";
+        }
+        ?>
       </select>
     </td>
     <td>
       <select name="Jaar" >
-        <?php echo $vulJaar; ?>
+        <?php 
+          for($jaar= (date("Y") - 5); $jaar > (date("Y") - 125); $jaar--)
+          {
+            echo "<option>$jaar</option>";
+          }
+        ?>
       </select>
     </td>
   </tr>
