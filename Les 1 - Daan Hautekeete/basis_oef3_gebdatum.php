@@ -3,7 +3,7 @@
 $maanden = array("Maand", "januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december");
 
 //als het formulier verzonden is
-if(isset($_POST["btnResultaat"])) {
+// if(isset($_POST["btnResultaat"])) {
   $gekozennaam = $_POST["txtNaam"];
   $gekozendag = $_POST["Dag"];
   $gekozenmaand = $_POST["Maand"];
@@ -50,7 +50,7 @@ if(isset($_POST["btnResultaat"])) {
 
 
   $output = " Beste $gekozennaam, u bent geboren op $gebdatvol <br>Notatie NBN: $datNBN";
-}
+// }
 
 //Keuzelijst dag vullen met waarden
 $vulDagen = "";
@@ -146,7 +146,7 @@ font-size: 1.3em;
             echo " selected";
           }
 
-          echo ">$maanden[$i]</option>";
+          echo ">$maanden[$i]</option>\n";
         }
         ?>
       </select>
