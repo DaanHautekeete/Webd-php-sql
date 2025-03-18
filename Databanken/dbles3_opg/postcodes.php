@@ -20,7 +20,7 @@
 
     if ($blokje == 10) {
       // 2 lege rijen toevoegen
-      $output .= "<tr><td></td></tr><tr><td></td></tr>";
+      $output .= "<tr><td>&nbsp;</td></tr><tr><td></td></tr>\n";
       $blokje = 0;
     }
 
