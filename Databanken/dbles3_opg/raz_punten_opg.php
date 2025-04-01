@@ -1,5 +1,68 @@
 <?php
 include("cnndbles3.php");
+
+// Punten genereren
+if(isset($_POST["cboKandidaat"])) 
+{
+  $bonus = 0;
+  $tekort = 0;
+  
+  $gekozenkandidaat = $_POST["cboKandidaat"];
+
+  $sqlPunten = "select * from tblrazresults where exkand = $gekozenkandidaat";
+  $result = $db->query($sqlPunten);
+  
+  $row = $result->fetch_assoc();
+
+  for($i =1; $i <= 7; $i++) 
+  {
+    // {} = werk eerst uit wat er binnen de haakjes staat
+    ${'h'.$i} = $row['h'.$i];
+
+    // Tekortpunten berekenen
+    if(${'h'.$i} < 50) 
+    {
+      // Aantal terkortpunten berekenen
+      $tekort += (50 - ${'h'.$i});
+    }
+
+    $totaal += ${'h'.$i};
+  }
+  $score = $totaal/7;
+
+
+  // Bonuspunten berekenen 
+  if($score >=50) 
+  {
+    $bonus = floor($score/10);
+  }
+
+  // Controleren op geslaagd
+  if($tekort > $bonus) {
+    $resultaat = "niet geslaagd";
+  }
+  else {
+    $resultaat = "geslaagd";
+  }
+
+  
+}
+
+// Keuzelijst invullen
+$sqlcombo = "select * from tblrazkandidaten order by fnaam, voornaam";
+$resultcombo = $db->query($sqlcombo);
+
+while($rowcombo = $resultcombo->fetch_assoc()) 
+{
+  $id = $rowcombo["idkand"];
+  $voornaam = $rowcombo["voornaam"];
+  $fnaam = $rowcombo["fnaam"];
+
+  $combo .= "<option value='$id'>$fnaam $voornaam</option>\n";
+  
+}
+
+
 ?>
 <!doctype html>
 <html>
@@ -57,7 +120,11 @@ background-color: #FFFFFF;
     <table width= "80%" border="0" align="center" cellpadding="0" cellspacing="0" class="rand">
   <tr>
     <td><form id="form1" name="frmNaamlijst" method="post" action="">
-  Kies een examenkandidaat: KEUZELIJST
+    <select name="cboKandidaat" onchange="document.frmNaamlijst.submit()">
+      <option value="0">Kies een kandidaat</option>
+      <!-- Combobox vullen met alle namen -->
+      <?= $combo;?>
+    </select>
 </form></td>
   </tr>
   
