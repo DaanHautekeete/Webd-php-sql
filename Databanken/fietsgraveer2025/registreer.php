@@ -7,6 +7,8 @@
 include("cnnfietsgraveer.php");
 include("algemeen.php");
 
+$show = "form";
+
 //Inladen van graveerplaatsen
 $sqlGraveerplaatsen = "select * from tblplaatsen ORDER BY gemeente";
 
@@ -36,6 +38,7 @@ while($graveerplaatsen = $resultGraveerplaatsen->fetch_assoc()) {
 // Als het formulier verzonden is
 if(isset($_POST["btnRegistreer"])) 
 {
+  $show = "output";
   // Waarden ophalen uit de velden
   $familienaam = addslashes($_POST["txtFamilienaam"]);
   $voornaam = $_POST["txtVoornaam"];
@@ -58,6 +61,28 @@ if(isset($_POST["btnRegistreer"]))
   $sqlRegistreren = "INSERT INTO `tblregistratie`(`fnaam`, `voornaam`, `telefoon`, `email`, `plaats`, `wachtwoord`, `ipadres`) VALUES ('$familienaam','$voornaam', '$telefoon','$email',$gekozengraveerplaats,'$wachtwoord','$ipadres')";
   
   $db->query($sqlRegistreren);
+
+  // Bevestiging registratie
+  $bevestiging = "De volgende gegevens werden geregistreerd:<br>";
+  $bevestiging .= "Naam: <strong>$familienaam $voornaam</strong><br>";
+  $bevestiging .= "Telefoon: <strong>$telefoon</strong><br>";
+  $bevestiging .= "E-mailadres: <strong>$email</strong><br>";
+
+  $sqlInfoPlaats = "Select * from tblplaatsen where graveerID = $gekozengraveerplaats";
+
+  $InfoPlaats = $db->query($sqlInfoPlaats);
+
+  $info = $InfoPlaats->fetch_assoc();
+
+  $bevestiging .= "Graveerplaats: ". $info["gemeente"] . " - ". $info["locatie"] . " (" . $info["adres"] .") <br>";
+
+  $bevestiging .= "Tijdstip:";
+
+
+  echo $bevestiging;
+
+
+
 
 }
 
@@ -85,6 +110,9 @@ if(isset($_POST["btnRegistreer"]))
    	   <div class="col-md-9">
    	   <h1>Registreer je fietsgravure</h1>
 
+<?php 
+  if($show == "form") {
+?>
 <form id="form1" name="form1" method="post" action="">
   <fieldset><legend>Persoonlijke gegevens</legend>
     <table width="800" border="0" cellspacing="0" cellpadding="0">
@@ -115,6 +143,7 @@ if(isset($_POST["btnRegistreer"]))
 <p class="bericht"></p>
   <input name="btnRegistreer"  type="submit" id="btnRegistreer" value="Registreer je fietsgravure" />
 </form>
+<?php}else{echo $bevestiging;}?>
 <p>&nbsp;</p>
            </div>
            <div class="col-md-3">
