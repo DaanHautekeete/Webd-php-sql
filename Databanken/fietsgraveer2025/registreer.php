@@ -37,15 +37,25 @@ while($graveerplaatsen = $resultGraveerplaatsen->fetch_assoc()) {
 if(isset($_POST["btnRegistreer"])) 
 {
   // Waarden ophalen uit de velden
-  $familienaam = $_POST["txtFamilienaam"];
+  $familienaam = addslashes($_POST["txtFamilienaam"]);
   $voornaam = $_POST["txtVoornaam"];
   $telefoon = $_POST["txtTelefoon"];
   $email = $_POST["txtEmail"];
   $gekozengraveerplaats = $_POST["rdbGraveerplaats"];
   $ipadres = $_SERVER['REMOTE_ADDR'];
 
+  // Wachtwoord genereren
+  $wachtwoord = "";
+  $wwtekens = array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'm', 'n', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z','A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z','2', '3', '4', '5', '6', '7', '8', '9');
+  
+  // loop voor wachtwoord te maken
+  for($i = 0; $i < 8; $i++) {
+    $teken = $wwtekens[mt_rand(0,count($wwtekens))];
+    $wachtwoord .= $teken;
+  }
+
   // SQL query maken
-  $sqlRegistreren = "INSERT INTO `tblregistratie`(`fnaam`, `voornaam`, `telefoon`, `email`, `plaats`, `wachtwoord`, `ipadres`) VALUES ('$familienaam','$voornaam', '$telefoon','$email',$gekozengraveerplaats,'$voornaam','$ipadres')";
+  $sqlRegistreren = "INSERT INTO `tblregistratie`(`fnaam`, `voornaam`, `telefoon`, `email`, `plaats`, `wachtwoord`, `ipadres`) VALUES ('$familienaam','$voornaam', '$telefoon','$email',$gekozengraveerplaats,'$wachtwoord','$ipadres')";
   
   $db->query($sqlRegistreren);
 
