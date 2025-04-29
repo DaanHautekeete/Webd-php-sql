@@ -1,6 +1,37 @@
+<!-- Stappenplan -->
+<!-- 1) graveerplaatsen in form krijgen -->
+<!-- 2) registreren (indienen & bevestigen) -->
+<!-- 3) feedback-->
+
 <?php
 include("cnnfietsgraveer.php");
 include("algemeen.php");
+
+//Inladen van graveerplaatsen
+$sqlGraveerplaatsen = "select * from tblplaatsen ORDER BY gemeente";
+
+$resultGraveerplaatsen = $db->query($sqlGraveerplaatsen) or die("Ophalen data is mislukt");
+$echoVulTabelGraveerlijsten = "";
+$blokje = 0;
+
+//tabel vullen met informatie
+while($graveerplaatsen = $resultGraveerplaatsen->fetch_assoc()) {
+  $graveerplaats = $graveerplaatsen["gemeente"];
+  $graveerplaatsID = $graveerplaatsen["graveerID"];
+  
+  // Controleren of er 5 plaatsen naast elkaar staan => zoja, dan moeten we een lege rij toevoegen
+  if($blokje == 5) {
+    $echoVulTabelGraveerlijsten .= "<tr><td>&nbsp;</td></tr><tr><td></td></tr>\n";
+    $blokje = 0;
+  }
+  
+  $echoVulTabelGraveerlijsten .= "<td><input value='$graveerplaatsID' type='radio' name='keuze'>$graveerplaats</input></td>";
+
+  
+  $blokje += 1;
+
+};
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,7 +77,7 @@ include("algemeen.php");
   <fieldset><legend>Kies je graveerplaats</legend>
   <table width="800" border="0" cellspacing="0" cellpadding="0"> 
   <tr>
-HIER KOMEN DE PLAATSEN WAARUIT JE KUNT KIEZEN!
+    <?= $echoVulTabelGraveerlijsten?>
   
   
   </tr>
