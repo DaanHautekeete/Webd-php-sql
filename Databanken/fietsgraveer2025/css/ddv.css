@@ -1,0 +1,176 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+background-color:#A62D1A;
+margin-top: 4em;
+margin-bottom: 3em;
+}
+.container {
+background-color: #FFF;	
+}
+.footerback {
+background-color: #86979d;
+	color: black;
+	padding: 1em;
+	}
+.footerback a {color: inherit;}
+.footerback h1, .footerback h2, .footerback h3, .footerback h4, .footerback h5 {color: inherit;}
+
+.klein {
+font-size: 0.8em;	
+}
+.ddvnopad {
+padding:0;
+}
+ul {
+padding-left: 0;
+}
+.row li {
+position: relative;
+left: 1em;
+	padding-left: 0;
+list-style-type: square;
+}
+
+
+input, select {
+border: solid 1px #006430;
+padding: 0.2em 0.1em;
+color: #003;
+font-weight:600;
+margin-bottom: 2px;
+}
+input[type='email']
+{
+background-color: darkorange;
+color: white;	
+padding-left: 1em;
+}
+input[type='email']::placeholder {color: white;}
+
+legend {
+font-weight: bold;
+color: #A62D1A;
+font-size: 1.2em;
+display: inline;
+}
+
+input[type="submit"]
+{
+color: #006430;
+font-size: 1em;	
+padding-left: 1em;
+padding-right: 1em;
+}
+#frmLogin input[type="submit"]:hover
+{
+background-color: #A62D1A;
+color: white;
+}
+input[type="radio"]
+{
+	margin-left: 1em;
+}
+input[type="radio"]:first-child
+{
+	margin-left: 0em;
+}
+
+
+.table th,
+.table td {
+  padding-left: 0;
+padding-right: 0;
+padding-top: 0.1rem;
+padding-bottom: 0.1em;
+  vertical-align: middle;
+  border-top: 1px solid #dee2e6;
+}
+
+
+ol {
+list-style-type: decimal;
+}
+
+
+#frmLogin {
+margin-top: 0.05em;
+margin-bottom: 0.5em;
+padding: 1em;
+padding-bottom:0;
+border: solid 1px #A62D1A;
+background-color: #DE462E;
+}
+#frmLogin h4 {color: white;}
+
+#frmLogin input.inputsmall {
+margin-bottom: 0.4em;
+padding: 0.5em;
+}	
+
+#frmLogin input[type="submit"] {
+padding: 0.5em;
+background-color: white;
+width: 95%;
+}
+
+#rechts {text-align: left;
+width: 40%;
+}
+
+
+
+/*fietsgraveer*/
+.onpaar {
+	color: #FFF;
+	background-color: #A62D1A;	
+}
+
+fieldset {
+	padding: 0.5em;
+	margin-bottom:0.5em;	
+	border: 1px solid #A62D1A;
+}
+
+#form1 {
+	display: block;
+	border: solid 1px #A62D1A;
+	padding: 0.5em;
+	}
+	#form1 input[type="submit"],#form1 input[type="text"], #form1 select
+	{
+	padding: 0.2em;
+	font-size: 1em;
+	font-weight: bold;
+	color: #A62D1A;
+	}
+
+.rand {
+	border-bottom: solid 1px #A62D1A;	
+}
+.witteletters {
+	color: #FFF;	
+	}
+.alert {
+font-weight: bold;
+color: white;
+margin: 0;
+padding:0;
+}
+div.regcode {
+margin-top: 0;	
+}
+.regcode {
+border: solid 4px #A62D1A;
+text-align: center;
+font-weight: bold;
+padding: 0.5em;
+}
+.regcodeklein {
+color: #A62D1A;
+text-align: center;
+font-size: 0.8em;
+margin:0;
+padding: 0;	
+font-weight:normal;
+}
