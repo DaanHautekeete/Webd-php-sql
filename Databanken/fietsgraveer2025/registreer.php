@@ -25,12 +25,31 @@ while($graveerplaatsen = $resultGraveerplaatsen->fetch_assoc()) {
     $blokje = 0;
   }
   
-  $echoVulTabelGraveerlijsten .= "<td><input value='$graveerplaatsID' type='radio' name='keuze'>$graveerplaats</input></td>";
+  $echoVulTabelGraveerlijsten .= "<td><input value='$graveerplaatsID' type='radio' name='rdbGraveerplaats'>$graveerplaats</input></td>";
 
   
   $blokje += 1;
 
 };
+
+
+// Als het formulier verzonden is
+if(isset($_POST["btnRegistreer"])) 
+{
+  // Waarden ophalen uit de velden
+  $familienaam = $_POST["txtFamilienaam"];
+  $voornaam = $_POST["txtVoornaam"];
+  $telefoon = $_POST["txtTelefoon"];
+  $email = $_POST["txtEmail"];
+  $gekozengraveerplaats = $_POST["rdbGraveerplaats"];
+  $ipadres = $_SERVER['REMOTE_ADDR'];
+
+  // SQL query maken
+  $sqlRegistreren = "INSERT INTO `tblregistratie`(`fnaam`, `voornaam`, `telefoon`, `email`, `plaats`, `wachtwoord`, `ipadres`) VALUES ('$familienaam','$voornaam', '$telefoon','$email',$gekozengraveerplaats,'$voornaam','$ipadres')";
+  
+  $db->query($sqlRegistreren);
+
+}
 
 ?>
 <!DOCTYPE html>
@@ -67,9 +86,9 @@ while($graveerplaatsen = $resultGraveerplaatsen->fetch_assoc()) {
         </tr>
       <tr>
         <td>Telefoon</td>
-        <td><input name="txtTelefoon" type="text"   /></td>
+        <td><input name="txtTelefoon" type="text" required  /></td>
         <td>E-mailadres</td>
-        <td><input name="txtEmail" type="text"   /></td>
+        <td><input name="txtEmail" type="text"  required /></td>
         </tr>
   </table>
     
