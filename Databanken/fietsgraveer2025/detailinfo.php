@@ -1,6 +1,63 @@
 <?php
 include("cnnfietsgraveer.php");
 include("algemeen.php");
+
+
+// Lijst plaatsen links
+$qryPlaatsen = $db->query("SELECT * from tblplaatsen ORDER BY gemeente");
+
+while($rowPlaatsen = $qryPlaatsen->fetch_assoc()) 
+{
+  $ID = $rowPlaatsen["graveerID"];
+  $gemeente = $rowPlaatsen["gemeente"];
+  $locatie = $rowPlaatsen["locatie"];
+
+  $plaatsen .= "<tr><td>$gemeente</td><td>$locatie</td><td><a href='detailinfo.php?id=$ID'> <img src='images/picto_detail.jpg'></a></td></tr>\n";
+}
+
+// Conditioneel maken
+if(!empty($_GET['id'])) {
+  // Detailinfo ophalen
+  $gekozenID = $_GET['id'];
+
+  // record ophalen
+  $qryInfo = $db->query("SELECT * FROM tblplaatsen WHERE graveerID = $gekozenID");
+  while($rowInfo = $qryInfo->fetch_assoc()) {
+    $gemeente = $rowInfo["gemeente"];
+    $locatie = $rowInfo["locatie"];
+    $adres = $rowInfo["adres"];
+    $datum = $rowInfo["datum"];
+    $uur = $rowInfo["uur"];
+  }
+  
+  // Tabel met info over gemeente maken
+  $details = "<p><strong>Detailinfo $gemeente</strong></p>
+  <table class='table'>
+  <tr>
+    <td width ='100' class='onderrand'>Gemeente</td>
+    <td width ='200' class='onderrand'>$gemeente</td>
+  </tr>
+  <tr>
+    <td class='onderrand'>Locatie</td>
+    <td class='onderrand'>$locatie</td>
+  </tr>
+  <tr>
+    <td class='onderrand'>Adres</td>
+    <td class='onderrand'>$adres</td>
+  </tr>
+  <tr>
+    <td class='onderrand'>Datum</td>
+    <td class='onderrand'>$datum</td>
+  </tr>
+  <tr>
+    <td class='onderrand'>Uur</td>
+    <td class='onderrand'>$uur</td>
+  </tr>
+  </table>";
+}
+
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,33 +88,11 @@ include("algemeen.php");
 <div class="col-md-5">
 <table class='table'>
 <tr class='onpaar'><td><strong>Gemeente</strong></td><td><strong>Locatie</strong></td><td>&nbsp;</td></tr>
+<?= $plaatsen;?>
 </table>
 </div>	
 <div class="col-md-4">
-
-<p><strong>Detailinfo XXX</strong></p>
-	<table class='table'>
-  <tr >
-    <td width ='100' class="onderrand">Gemeente</td>
-    <td width ='200' class="onderrand">XXX</td>
-  </tr>
-  <tr>
-    <td class="onderrand">Locatie</td>
-    <td class="onderrand">XXX</td>
-  </tr>
-  <tr>
-    <td class="onderrand">Adres</td>
-    <td class="onderrand">XXX</td>
-  </tr>
-  <tr>
-    <td class="onderrand">Datum</td>
-    <td class="onderrand">XXX</td>
-  </tr>
-  <tr>
-    <td class="onderrand">Uur</td>
-    <td class="onderrand">XXX</td>
-  </tr>
-</table>
+  <?= $details;?>
 
            </div>
            <div class="col-md-3">
