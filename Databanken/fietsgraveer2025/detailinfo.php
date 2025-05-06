@@ -12,6 +12,7 @@ while($rowPlaatsen = $qryPlaatsen->fetch_assoc())
   $gemeente = $rowPlaatsen["gemeente"];
   $locatie = $rowPlaatsen["locatie"];
 
+  // Hier geven we een parameter mee aan de hyperlink, deze gebruiken we dan later om de info op te halen
   $plaatsen .= "<tr><td>$gemeente</td><td>$locatie</td><td><a href='detailinfo.php?id=$ID'> <img src='images/picto_detail.jpg'></a></td></tr>\n";
 }
 
