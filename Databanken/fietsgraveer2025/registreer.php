@@ -79,8 +79,6 @@ if(isset($_POST["btnRegistreer"]))
   $bevestiging .= "Tijdstip:";
 
 
-  echo $bevestiging;
-
 
 
 
@@ -143,7 +141,10 @@ if(isset($_POST["btnRegistreer"]))
 <p class="bericht"></p>
   <input name="btnRegistreer"  type="submit" id="btnRegistreer" value="Registreer je fietsgravure" />
 </form>
-<?php}else{echo $bevestiging;}?>
+<?php
+}
+else
+{echo $bevestiging;}?>
 <p>&nbsp;</p>
            </div>
            <div class="col-md-3">
