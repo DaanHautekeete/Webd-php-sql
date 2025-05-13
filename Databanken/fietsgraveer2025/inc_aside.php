@@ -11,7 +11,7 @@
   }
   else 
   {
-    echo '<input type="submit" name="btnLogout" value="Logout $_SESSION["vnaam"] $_SESSION["fnaam"]">';	
+    echo "<input type='submit' name='btnLogout' value='Logout $_SESSION[vnaam] $_SESSION[fnaam]'>";	
   }
   
   echo "<p class='alert'>$loginFout</p>";
