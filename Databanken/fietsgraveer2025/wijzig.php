@@ -7,6 +7,33 @@ include("algemeen.php");
 // 2) gegevens ophalen (persoon & keuzelijst voor plaats maken)
 // 3) gegevens aanpassen
 
+
+// als het formulier verzonden is
+if(isset($_POST['btnWijzig'])) 
+{
+  // Alle informatie uit velden halen
+  $idPersoon = $_POST['cboPersoon'];
+
+  if($idPersoon != '0') 
+  {
+    $aangepastefnaam = $_POST['txtFamilienaam'];
+    $aangepastevnaam = $_POST['txtVoornaam'];
+    $aangepasteTelefoon = $_POST['txtTelefoon'];
+    $aangepasteEmail = $_POST['txtEmail'];
+    $aangepastePlaats = $_POST['cboPlaatsen'];
+
+    $ipadres = $_SERVER['REMOTE_ADDR'];
+    $tijdreg = date('Y-m-d');
+  
+    // Query uitvoeren
+    $qryGegevensAanpassen = $db->query("UPDATE tblregistratie SET fnaam = '$aangepastefnaam', voornaam = '$aangepastevnaam', telefoon = '$aangepasteTelefoon', email = '$aangepasteEmail', plaats = $aangepastePlaats, ipadres='$ipadres', tijdreg = '$tijdreg' WHERE registratieID = $idPersoon");
+
+
+    $bericht = "$aangepastefnaam $aangepastevnaam is gewijzigd op $tijdreg via ip: $ipadres";
+  }
+
+}
+
 // keuzelijst vullen met personen
 $qryPersonen = $db->query("select * from tblregistratie order by fnaam, voornaam");
 
@@ -63,9 +90,6 @@ if(isset($_POST['cboPersoon']))
 
   }
 }
-
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -144,7 +168,7 @@ if(isset($_POST['cboPersoon']))
     </tr>
     
     <tr>
-      <td colspan="2">HIER KOMT BERICHT DAT WIJZIGINGEN BEVESTIGT</td>
+      <td colspan="2"><?= $bericht;?></td>
       
     </tr>
   </table>
