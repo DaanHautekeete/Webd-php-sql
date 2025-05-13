@@ -7,7 +7,7 @@ include("algemeen.php");
 // 2) gegevens ophalen (persoon & keuzelijst voor plaats maken)
 // 3) gegevens aanpassen
 
-// 1) keuzelijst vullen met personen
+// keuzelijst vullen met personen
 $qryPersonen = $db->query("select * from tblregistratie order by fnaam, voornaam");
 
 while($recordpersoon = $qryPersonen->fetch_assoc()) {
@@ -49,7 +49,21 @@ if(isset($_POST['cboPersoon']))
     $telefoonGekozenpersoon = $recordgekozenpersoon['telefoon'];
     $emailGekozenpersoon = $recordgekozenpersoon['email'];
   }
+
+
+  // Keuzelijst met plaatsen vullen
+  $qryPlaatsen = $db->query("select * from tblplaatsen order by gemeente");
+
+  while($recordPlaats = $qryPlaatsen->fetch_assoc()) {
+    $gemeente = $recordPlaats['gemeente'];
+    $locatie = $recordPlaats['locatie'];
+    $graveerID = $recordPlaats['graveerID'];
+
+    $vulPlaatsen .= "<option value='$graveerID'>$gemeente - $locatie</option>";
+
+  }
 }
+
 
 
 ?>
@@ -84,6 +98,10 @@ if(isset($_POST['cboPersoon']))
       </select>
   </p>
  
+  <?php 
+  if(isset($_POST['cboPersoon'])) {
+
+  ?>
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td>&nbsp;</td>
@@ -108,7 +126,10 @@ if(isset($_POST['cboPersoon']))
     <tr>
       <td>Plaats</td>
       <td>
-     KEUZELIJST PLAATSEN
+     <select name="cboPlaatsen">
+      <option value='0'>Kies je plaats</option>
+      <?= $vulPlaatsen?>
+</select>
 </td>
     </tr>
     <tr>
@@ -127,7 +148,7 @@ if(isset($_POST['cboPersoon']))
       
     </tr>
   </table>
-
+<?php }?>
 </form>
            </div>
            <div class="col-md-3">
