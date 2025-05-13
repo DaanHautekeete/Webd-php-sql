@@ -1,6 +1,57 @@
 <?php
 include("cnnfietsgraveer.php");
 include("algemeen.php");
+
+// Stappenplan:
+// 1) keuzelijst vullen met alle personen
+// 2) gegevens ophalen (persoon & keuzelijst voor plaats maken)
+// 3) gegevens aanpassen
+
+// 1) keuzelijst vullen met personen
+$qryPersonen = $db->query("select * from tblregistratie order by fnaam, voornaam");
+
+while($recordpersoon = $qryPersonen->fetch_assoc()) {
+  $vnaam = $recordpersoon['voornaam'];
+  $fnaam = $recordpersoon['fnaam'];
+  $registratieID = $recordpersoon['registratieID'];
+
+  $comboPersonen .= "<option value='$registratieID'>$fnaam $vnaam</option>\n";
+}
+
+// Als een keuze gemaakt is van persoon
+if(isset($_POST['cboPersoon'])) 
+{
+  $gekozenPersoon = $_POST['cboPersoon'];
+
+  $qryPersonen = $db->query("select * from tblregistratie order by fnaam, voornaam");
+
+  while($recordpersoon = $qryPersonen->fetch_assoc()) {
+    $vnaam = $recordpersoon['voornaam'];
+    $fnaam = $recordpersoon['fnaam'];
+    $registratieID = $recordpersoon['registratieID'];
+
+    $comboPersonen .= "<option value='$registratieID' ";
+
+    if($registratieID == $gekozenPersoon) {
+      $comboPersonen .= "selected";
+    }
+    
+    $comboPersonen .= ">$fnaam $vnaam</option>";
+  }
+
+
+  //informatie inladen van de gebruiker
+  $qryPersoon = $db->query("select * from tblregistratie where registratieID = $gekozenPersoon");
+
+  while($recordgekozenpersoon = $qryPersoon->fetch_assoc()) {
+    $fnaamGekozenpersoon = $recordgekozenpersoon['fnaam'];
+    $vnaamGekozenpersoon = $recordgekozenpersoon['voornaam'];
+    $telefoonGekozenpersoon = $recordgekozenpersoon['telefoon'];
+    $emailGekozenpersoon = $recordgekozenpersoon['email'];
+  }
+}
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,7 +80,7 @@ include("algemeen.php");
   <p>Kies een persoon: 
     <select name="cboPersoon" onchange="document.frmPersoon.submit()">
       <option value="0">Maak je keuze!</option>
-   
+      <?= $comboPersonen?>
       </select>
   </p>
  
@@ -40,19 +91,19 @@ include("algemeen.php");
     </tr>
     <tr>
       <td width="120">Familienaam</td>
-      <td><input name="txtFamilienaam" type="text" id="txtFamilienaam"/></td>
+      <td><input name="txtFamilienaam" type="text" id="txtFamilienaam" value='<?php echo $fnaamGekozenpersoon?>'/></td>
     </tr>
     <tr>
       <td>Voornaam</td>
-      <td><input name="txtVoornaam" type="text" id="txtVoornaam"/></td>
+      <td><input name="txtVoornaam" type="text" id="txtVoornaam" value='<?php echo $vnaamGekozenpersoon?>'/></td>
     </tr>
     <tr>
       <td>Telefoon</td>
-      <td><input name="txtTelefoon" type="text" id="txtTelefoon"/></td>
+      <td><input name="txtTelefoon" type="text" id="txtTelefoon" value='<?php echo $telefoonGekozenpersoon?>'/></td>
     </tr>
     <tr>
       <td>Email</td>
-      <td><input name="txtEmail" type="text" id="txtEmail" size="40"/></td>
+      <td><input name="txtEmail" type="text" id="txtEmail" size="40" value='<?php echo $emailGekozenpersoon?>'/></td>
     </tr>
     <tr>
       <td>Plaats</td>
