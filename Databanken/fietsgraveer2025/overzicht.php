@@ -1,6 +1,24 @@
 <?php 
 include("cnnFietsgraveer.php");
 include("algemeen.php");
+
+// Inner join gebruiken om een link te leggen met verschillende tabellen
+$qryOverzicht = $db->query("select * from tblregistratie inner join tblplaatsen on tblregistratie.plaats = tblplaatsen.graveerID order by fnaam,voornaam");
+
+
+while($overzichtRij = $qryOverzicht->fetch_assoc()) 
+{
+    $naam = $overzichtRij['fnaam'];
+    $vnaam = $overzichtRij['voornaam'];
+    $gemeente = $overzichtRij['gemeente'];
+    $locatie = $overzichtRij['locatie'];
+
+    $lijst .= "<tr class='onpaar'><td>$naam</td><td>$vnaam</td><td>$gemeente</td><td>$locatie</td></tr>\n";
+}
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,7 +44,10 @@ include("algemeen.php");
    	   <h1>Overzicht fietsgraveeractie voorjaar 2025</h1>
 <p>U kunt op &eacute;&eacute;n van volgende locaties terecht voor het graveren van je fiets. Vergeet je niet op voorhand in te schrijven. Kies daarvoor het menu <strong>Registreer</strong>.</p> 
 <table id ="prodlijst" class="table">	
-<tr class='onpaar'><td><strong>Gemeente</strong></td><td><strong>Locatie</strong></td><td><strong>Adres</strong></td><td><strong>Datum</strong></td><td><strong>Uur</strong></td></tr>
+<tr class='onpaar'><td><strong>Naam</strong></td><td><strong>Voornaam</strong></td><td><strong>Plaats</strong></td><td><strong>Locatie</strong></td></tr>
+
+<!-- Lijst vullen met echo -->
+<?= $lijst;?>
 </table>
            </div>
            <div class="col-md-3">
