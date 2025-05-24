@@ -1,6 +1,29 @@
 <?php
 include("cnnfietsgraveer.php");
 include("algemeen.php");
+
+// lijst met personen opstellen
+if(!isset($_GET['id']) or $_POST['btnKnop'] == "Nee") {
+  $sql = "SELECT * FROM tblregistratie ORDER BY fnaam,voornaam";
+  $result = $db->query($sql);
+  while($rowresult = $result->fetch_assoc()) {
+    $totnaam = $rowresult['voornaam'];
+    $totnaam .= " ";
+    $totnaam .= $rowresult['fnaam'];
+    $id = $rowresult['registratieID'];
+    $lijst.="<tr><td width='60%'>$totnaam</td><td><a href='?id=$id'><img src='images/picto_delete.jpg'></a></td></tr>";
+  }
+}
+
+// effectief verwijderen
+if($_POST['btnKnop'] == "Ja"){
+  $sqlverwijder = "DELETE FROM tblregistratie WHERE registratieID=".$_SESSION['id'];
+  $db->query($sqlverwijder);
+  $message = "<strong>".$_SESSION['vnaam']." ".$_SESSION['fnaam']."</strong> is definitief verwijderd!<br/><br/>";
+  //session leeg maken
+  unset($_SESSION['id'],$_SESSION['fnaam'],$_SESSION['vnaam']);
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,20 +48,37 @@ include("algemeen.php");
    	   <div class="col-md-5">
           <h1>Verwijder registratie</h1>
 <table class='table table-striped table-hover'>
-<tr><td width='60%'>XXX YYY</td><td>PICTOGRAM</td></tr>
+  <?= $lijst?>
 </table>
+
+<?php
+//je zou ook gwn de voor- en achternaam kunnen hebben meegegeven met de href
+if(isset($_GET['id']) and !isset($_POST['btnKnop'])){
+  $_SESSION['id'] = $_GET['id'];
+  $sql1 = "SELECT *FROM tblregistratie WHERE registratieID =".$_GET['id'];
+  $result1 = $db->query($sql1);
+  $row1 = $result1->fetch_assoc();
+  $_SESSION['fnaam'] = $row1['fnaam'];
+  $_SESSION['vnaam'] = $row1['voornaam'];
+?>
+
+
 
 <form id="form1" name="form1" method="post" action="">
   <table border="0" cellspacing="0" cellpadding="0">
     <tr>
-      <td width="500">Wilt u de gegevens van <strong>XXX YYY</strong> definitief verwijderen? </td>
+      <td width="500">Wilt u de gegevens van <?= $_SESSION['vnaam']." ".$_SESSION['fnaam'];?> definitief verwijderen? </td>
       <td width="50"><input name="btnKnop" type="submit" id="btnKnop" value="Ja" /></td>
       <td width="50"><input name="btnKnop" type="submit" id="btnKnop" value="Nee" /></td>
     </tr>
   </table>
 </form>
 
-<strong>XXX YYY</strong> is definitief verwijderd!<br/><br/>
+<?php 
+} 
+echo $message
+?>
+
 <a href='verwijder.php'>Terug naar lijst</a>
            </div>
            <div class="col-md-4"></div>
