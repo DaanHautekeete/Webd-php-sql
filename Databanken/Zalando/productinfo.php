@@ -1,6 +1,15 @@
 <?php 
-include("cnnConnection.php");
-include("algemeen.php");
+    include("cnnConnection.php");
+    include("algemeen.php");
+
+    //alle categorien ophalen
+    $sqlcategorien = "SELECT DISTINCT categorie from tblcategorie ";
+    $categorieResult = $db->query($sqlcategorien) or die(mysql_error());
+
+    while($row = $categorieResult->fetch_assoc()) {
+        $outputKnoppen .= "<input type='submit' name='btncategorie' value='".$row["categorie"]."' class='knop'>";
+    }
+
 ?>
 <!doctype html>
 <html>
@@ -20,7 +29,7 @@ include("algemeen.php");
     <div id="content"> <h1>Productinfo</h1>
 
 <form method='post' name='frmCat'>
-<input type='submit' name='btnCat' value='xxx' class='knop'>
+<?= $outputKnoppen;?>
 </form>
 
 <div id="producten">
