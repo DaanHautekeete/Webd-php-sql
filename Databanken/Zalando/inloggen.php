@@ -60,6 +60,40 @@
     }
   }
 
+  //inloggen
+  if(isset($_POST["btnLogin"])) {
+    $email = $_POST["txtEmail"];
+    $wachtwoord = $_POST["txtWachtwoord"];
+
+
+    //controleren of wachtwoord bestaat
+    $sqlCheckEmail = "SELECT * from tblklanten WHERE Email = '$email'";
+    $result = $db->query($sqlCheckEmail) or die(mysql_error());
+
+    if($result->num_rows == 1) {
+      $account = $result->fetch_assoc();
+
+      //wachtwoord controleren
+      if($wachtwoord == $account["Wachtwoord"]) {
+        //inloggen
+        $_SESSION['ingelogd'] = "True";
+        $_SESSION['vnaam'] = $account["Voornaam"];
+        $_SESSION['fnaam'] = $account["Familienaam"];
+        $_SESSION['klantID'] = $account["KlantID"];
+        $_SEESION['email'] = $account["Email"];
+
+        $AlertLogin = "<p>U bent succesvol ingelogd</p>";
+
+      }
+      else {
+              $AlertLogin = "<p>Onjuist wachtwoord.</p>";
+      }
+    }
+    else {
+      $AlertLogin = "<p>Er is geen account gevonden met deze gegevens.</p>";
+    }
+
+  }
 ?>
 <!doctype html>
 <html>
@@ -96,7 +130,7 @@
       </tbody>
     </table>
   </form>
-  <div id="message">BERICHT</div>
+  <div id="message"><?=$AlertLogin;?></div>
   </div>
   <div id="registreer">
   <h1>Nieuwe klant - REGISTREER</h1>
