@@ -75,6 +75,7 @@
 
       //wachtwoord controleren
       if($wachtwoord == $account["Wachtwoord"]) {
+        
         //inloggen
         $_SESSION['ingelogd'] = "True";
         $_SESSION['vnaam'] = $account["Voornaam"];
@@ -84,15 +85,15 @@
 
         $AlertLogin = "<p>U bent succesvol ingelogd</p>";
 
+        header("Location:productinfo.php");
       }
       else {
-              $AlertLogin = "<p>Onjuist wachtwoord.</p>";
+        $AlertLogin = "<p>Onjuist wachtwoord.</p>";
       }
     }
     else {
       $AlertLogin = "<p>Er is geen account gevonden met deze gegevens.</p>";
     }
-
   }
 ?>
 <!doctype html>
