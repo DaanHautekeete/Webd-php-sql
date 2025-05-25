@@ -51,6 +51,8 @@
 
         $errorRegistratie = "<p>Registratie is voltooid</p>";
 
+        header("Location:welkom.php?id=$klantID");
+
       }
     }
     else {
