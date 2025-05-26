@@ -3,7 +3,7 @@
     include("algemeen.php");
 
     //alle categorien ophalen
-    $sqlcategorien = "SELECT DISTINCT categorie from tblcategorie ";
+    $sqlcategorien = "SELECT DISTINCT categorie from tblcategorie ORDER BY categorie";
     $categorieResult = $db->query($sqlcategorien) or die(mysql_error());
 
     while($row = $categorieResult->fetch_assoc()) {
@@ -28,11 +28,14 @@
             $categorie = $product['Categorie'];
             $subcategorie = $product['Subcategorie'];
 
+
             //opstellen van output
             $outputProducten .= "<div id='product'>";
-            $outputProducten .= "<div id='foto'><img src='/images/".$artikelNummer.".jpg'></div>";
+            $outputProducten .= "<a href='detail.php?id=$artikelNummer'><div id='foto'><img src=images/".$artikelNummer.".jpg></div></a>";
             $outputProducten .= "<div id='cat'><p>".$categorie." - ".$subcategorie."</div>";
             $outputProducten .= "<div id='merk'><p>".$merk."</p></div>";
+            $outputProducten .= "<div id='omschrijving'><p>".$omschrijving."</p></div>";
+            $outputProducten .= "<div id='prijs'><p>€ ".$prijs."</p></div>";
             $outputProducten .= "</div>";
             
         }
@@ -60,13 +63,13 @@
 </form>
 
 <div id="producten">
-
+<!-- 
 <div id='product'>
 <div id='foto'>FOTO</div>
 <div id='cat'>categorie - subcategorie</div>
 <div id='merk'>merk</div>
 <div id='omschrijving'>omschrijving</div>
-<div id='prijs'>€ xxx</div>
+<div id='prijs'>€ xxx</div> -->
 
 <?= $outputProducten ?>
 </div>
