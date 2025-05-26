@@ -1,6 +1,45 @@
 <?php 
-include("cnnConnection.php");
-include("algemeen.php");
+    include("cnnConnection.php");
+    include("algemeen.php");
+
+    // Ophalen van artikelnummer indien nodig
+    if(isset($_GET['id'])) {
+        $artikelnummer = $_GET['id'];
+
+        //alle nodige informatie ophalen
+        $sqlInfo = "Select * from tblartikels WHERE Artnr = '$artikelnummer'";
+        $infoResult = $db->query($sqlInfo);
+        while($product = $infoResult->fetch_assoc()) {
+            $categorie = $product['Categorie'];
+            $subCategorie = $product['Subcategorie'];
+            $merk = $product['Merk'];
+            $omschrijving = $product['Omschrijving'];
+            $prijs = $product['Prijs'];
+
+            // Omschrijving van subcategorie ophalen
+            $sqlomschrijving = "SELECT Omschrijving FROM tblcategorie WHERE Subcat = '$subCategorie'";
+            $omschrijvingResult = $db->query($sqlomschrijving);
+            while($row = $omschrijvingResult->fetch_assoc()) {
+                $omschrijvingCategorie = $row['Omschrijving'];
+            }
+
+        }
+        
+        // Output opstellen
+        $outputTitel =  "<h1>Detailinfo $artikelnummer - $subCategorie - $merk</h1>";
+        $outputOmschrijvingCat = "<p class='omschrijving'>$omschrijvingCategorie<br></p>";
+
+        $outputProduct .= "<div id='product'>";
+        $outputProduct .= "<div id='foto'><img src=images/".$artikelnummer.".jpg></div></a>";
+        $outputProduct .= "<div id='cat'><p>".$categorie." - ".$subCategorie."</div>";
+        $outputProduct .= "<div id='merk'><p>".$merk."</p></div>";
+        $outputProduct .= "<div id='omschrijving'><p>".$omschrijving."</p></div>";
+        $outputProduct .= "<div id='prijs'><p>€ ".$prijs."</p></div>";
+        $outputProduct .= "</div>";
+
+    }
+
+
 ?>
 <!doctype html>
 <html>
@@ -18,17 +57,13 @@ include("algemeen.php");
     </div>
     <div id="menu"><?php include("menu.php");?></div>
     <div id="content">
-<h1>Detailinfo ...</h1>
 
-<p class='omschrijving'>Omschrijving subcategorie<br></p>
-<div id='product'>
-<div id='foto'><img src='images/XXX.jpg'></div>
-<div id='cat'>Categorie - subcategorie</div>
-<div id='merk'>Merk</div>
-<div id='omschrijving'>Omschrijving</div>
-<div id='prijs'>€ XXX</div>
-</div>
-<p class='stopfloat'><a href='productinfo.php'>Terug naar productoverzicht</a></p>
+    <!-- Output -->
+    <?= $outputTitel?>
+    <?= $outputOmschrijvingCat?>
+    <?= $outputProduct ?>
+    </div>
+    <p class='stopfloat'><a href='productinfo.php'>Terug naar productoverzicht</a></p>
 
 
 
