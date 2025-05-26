@@ -1,6 +1,15 @@
 <?php 
-include("cnnConnection.php");
-include("algemeen.php");
+    include("cnnConnection.php");
+    include("algemeen.php");
+
+    // Controleren of gebruiker ingelogd is
+    if($_SESSION['ingelogd'] == "True") {
+        $alert = "<p>Ingelogde klanten kunnen bestellen</p>";
+    }
+    else {
+        $alert = "<p>Enkel ingelogde klanten kunnen bestellen!</p>";
+    }
+
 ?>
 <!doctype html>
 <html>
@@ -18,8 +27,7 @@ include("algemeen.php");
     </div>
     <div id="menu"><?php include("menu.php");?></div>
     <div id="content"><h1>Bestellen</h1>
-<p>Je bent een ingelogde klant die kan bestellen!</p>
-<p>Enkel ingelogde klanten kunnen bestellen!</p>		
+    <?= $alert ?>
 
 	</div>
     <footer><?php include("footer.php");?></footer>

@@ -4,6 +4,8 @@
 if(isset($_POST['btnLogout'])) {
   unset($_SESSION['vnaam'],$_SESSION['fnaam'],$_SESSION['klantID'], $_SEESION['email']);
   $_SESSION['ingelogd'] = "False";
+//   Navigeren naar Home
+header("Location:index.php");
 }
 
 ?>
