@@ -10,6 +10,33 @@
         $outputKnoppen .= "<input type='submit' name='btncategorie' value='".$row["categorie"]."' class='knop'>";
     }
 
+
+    //controleren of gebruiker op een knop heeft geklikt
+    if(isset($_POST["btncategorie"])) {
+        //ophalen geselecteerde categorie
+        $gekozenCategorie = $_POST["btncategorie"];
+
+
+        //sql statement maken om alle producten in die categorie op te halen
+        $sqlProducten = "SELECT * FROM tblartikels WHERE Categorie = '$gekozenCategorie'";
+        $sqlProductenCommand = $db->query($sqlProducten);
+        while($product = $sqlProductenCommand->fetch_assoc()) {
+            $artikelNummer = $product['Artnr'];
+            $merk = $product['Merk'];
+            $omschrijving = $product['Omschrijving'];
+            $prijs = $product['Prijs'];
+            $categorie = $product['Categorie'];
+            $subcategorie = $product['Subcategorie'];
+
+            //opstellen van output
+            $outputProducten .= "<div id='product'>";
+            $outputProducten .= "<div id='foto'><img src='/images/".$artikelNummer.".jpg'></div>";
+            $outputProducten .= "<div id='cat'><p>".$categorie." - ".$subcategorie."</div>";
+            $outputProducten .= "<div id='merk'><p>".$merk."</p></div>";
+            $outputProducten .= "</div>";
+            
+        }
+    }
 ?>
 <!doctype html>
 <html>
@@ -40,6 +67,8 @@
 <div id='merk'>merk</div>
 <div id='omschrijving'>omschrijving</div>
 <div id='prijs'>€ xxx</div>
+
+<?= $outputProducten ?>
 </div>
 
 </div>
