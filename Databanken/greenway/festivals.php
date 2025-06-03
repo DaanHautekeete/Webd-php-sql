@@ -1,6 +1,31 @@
 <?php 
-include("cnnConnectie.php");
-include("algemeen.php");
+    include("cnnConnectie.php");
+    include("algemeen.php");
+
+    // Festivals
+    $sqlFestivals = "SELECT * FROM tblfestivals"; 
+    $sqlFestivalsResult = $db->query($sqlFestivals) or die(mysql_error());
+    while($festival = $sqlFestivalsResult->fetch_assoc()) {
+        $idnl = $festival['idnl'];
+        $idfr = $festival['idfr'];
+        $beschrijvingNL = $festival['factnl'];
+        $beschrijvingFR = $festival['factfr'];
+
+        $outputProducten .= "<div id='fact'>";
+        // Controleren welke taal gekozen is
+        if($_SESSION['taal'] == 'nl') {
+            $outputProducten .= "<img src='images/$idnl.jpg' class='img-fluid'>";
+            $outputProducten .= "<p>$beschrijvingNL</p>";
+        }
+        else if($_SESSION['taal'] == 'fr') {
+            $outputProducten .= "<img src='images/$idfr.jpg' class='img-fluid'>";
+            $outputProducten .= "<p>$beschrijvingFR</p>";
+        }
+
+
+        $outputProducten .= "</div>";
+    }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,8 +50,8 @@ include("algemeen.php");
    	   <div class="col-md-8">
    	   <h1>Festivals - facts & figures</h1>
 
-<div id='fact'><img src='images/foto.jpg' class='img-fluid'><p>tekst fact</p></div>
-
+<!-- <div id='fact'><img src='images/foto.jpg' class='img-fluid'><p>tekst fact</p></div> -->
+<?=$outputProducten?>
 <div id='clearing'></div>
 		   </div>
         <div class="col-md-4">

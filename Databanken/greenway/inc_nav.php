@@ -1,3 +1,6 @@
+
+
+
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
   <a class="navbar-brand" href="#">Greenway - Meet the new meat! ***   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#hoofdmenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,8 +19,8 @@
 <form name='frmTaal' method='post'>
 <select name='cboTaal' onchange='document.frmTaal.submit()'>
 <option value='0'>Kies je taal</option>
-<option value='nl'>Nederlands</option>
-<option value='fr'>Frans</option>
+<option value='nl' <?php if($_SESSION['taal'] == 'nl') {echo "selected";}?>>Nederlands</option>
+<option value='fr' <?php if($_SESSION['taal'] == 'fr') {echo "selected";}?>>Frans</option>
 </select>
 </form>
   </div>

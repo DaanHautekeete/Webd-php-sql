@@ -1,6 +1,30 @@
 <?php
-include("cnnConnectie.php");
-include("algemeen.php");
+    include("cnnConnectie.php");
+    include("algemeen.php");
+
+    // Alle info ophalen van gekozen product
+    if(isset($_GET['artnr'])) {
+        $artnr = $_GET['artnr'];
+        $sqlinfo = "SELECT * FROM tblproducten WHERE artnr = '$artnr'";
+        $sqlinfoResult = $db->query($sqlinfo) or die(mysql_error());
+        while($product = $sqlinfoResult->fetch_assoc()) {
+            $artnr = $product['artnr'];
+            $naam = $product['product'];
+            $omschrijving = $product['omschrijving'];
+            $prijs = $product['prijs'];
+
+            //aantal bestellingen van dit product ophalen
+            $sqlBestellingen = "SELECT COUNT(*) FROM tblorderlijnen WHERE artikel = '$artnr'";
+            $sqlBestellingenResult = $db->query($sqlBestellingen) or die(mysql_error());
+            $bestellingen = $sqlBestellingenResult->fetch_row();
+            $aantalBestellingen = $bestellingen[0];
+
+
+        }
+    } 
+    else 
+    {
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,9 +50,9 @@ include("algemeen.php");
    	   <h1>Productinformatie</h1>
 
 <div id='prodinfo'>
-<div id='foto'><img src='images/foto.jpg'></div>
-<div id='info'><p class='prod'>product</p><p>omschrijving</p><p><strong>€ XXX</strong></p>
-<p>Reeds <strong>XXX</strong> stuks besteld!</p>
+<div id='foto'><img src='images/<?=$artnr;?>.jpg'></div>
+<div id='info'><p class='prod'><?=$naam?></p><p><?=$omschrijving;?></p><p><strong>€ <?=$prijs;?></strong></p>
+<p>Reeds <strong><?=$aantalBestellingen;?></strong> stuks besteld!</p>
 </div>
     
 <div id='clearing'></div>

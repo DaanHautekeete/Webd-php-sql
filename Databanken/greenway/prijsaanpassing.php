@@ -1,6 +1,26 @@
 <?php
-include("cnnConnectie.php");
-include("algemeen.php");
+    include("cnnConnectie.php");
+    include("algemeen.php");
+
+    // Controleren of gebruiker formulier heeft verzonden
+    if(isset($_POST['btnVerzend'])) {
+        // Controleren op inloggegevens
+        if($_POST['txtCode'] == "greenway") {
+            echo "ingelogd";
+            $artnr = $_POST['txtArtnr'];
+            //controleren of artikel bestaat
+            $sqlCheckProduct = "SELECT COUNT(*) from tblproducten WHERE artnr = '$artnr'";
+            $sqlCheckProductResult = $db->query($sqlCheckProduct);
+
+            // Dit moet nog aangepast worden
+            $aantal = $sqlCheckProductResult->num_rows();
+            echo $aantal;
+
+        }
+        else {
+            Header("Location: wrongcode.php");
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,7 +47,7 @@ include("algemeen.php");
 <form name='frmBesteloverzicht' method='post'>
 <input type='text' name='txtArtnr' placeholder='Typ artikelnummer in' required>
 <input type='password' name='txtCode' placeholder='Typ de beheerdercode in' required>
-<input type='submit' value='Toon prijsinformatie'>
+<input type='submit' name='btnVerzend' value='Toon prijsinformatie'>
 </form>
 <p>&nbsp;</p>
 

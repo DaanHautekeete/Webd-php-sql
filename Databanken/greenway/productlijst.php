@@ -1,6 +1,42 @@
-<?php
-include("cnnConnectie.php");
-include("algemeen.php");
+a<?php
+    include("cnnConnectie.php");
+    include("algemeen.php");
+
+    // Als de gebruiker een categorie heeft gekozen
+    if(isset($_POST['cboCategorie'])) {
+        $gekozenCat = $_POST['cboCategorie'];
+
+
+        $sqlProducten = "SELECT * FROM tblproducten WHERE productgroep = '$gekozenCat'";
+        $sqlProductenResult = $db->query($sqlProducten) or die(mysql_error());
+        while($product = $sqlProductenResult->fetch_assoc()) {
+            $artnr = $product['artnr'];
+            $productGroep = $product['productgroep'];
+            $productNaam = $product['product'];
+            $productOmschrijving = $product['omschrijving'];
+            $productPrijs = $product['prijs'];
+
+            $outputProducten .= "<tr><td><a href='info.php?artnr=$artnr'><img src='images/picto_info1.jpg'></a></td><td>$productNaam</td></tr>";
+        }
+    }
+
+    // Categorieën ophalen
+    $sqlcategorien = "SELECT * FROM tblcategorie";
+    $sqlcategorienResult = $db->query($sqlcategorien) or die(mysql_error());
+    while($categorie = $sqlcategorienResult->fetch_assoc()) {
+        $catID = $categorie['catID'];
+        $catomschrijving = $categorie['catomschrijving'];
+        
+
+        $outputKeuzeCat .= "<option value='$catID'"; 
+        if($gekozenCat == $catID) {
+            $outputKeuzeCat.=" selected";
+        }
+        
+        $outputKeuzeCat.= ">$catomschrijving</option>\n";
+    }
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,14 +61,16 @@ include("algemeen.php");
    	   <div class="col-md-8">
    	   <h1>Productlijst</h1>
    	   <form name="frmCategorie" method="post">
-   	   <p><select name="cboCategorie">
+   	   <p><select name="cboCategorie" onChange="document.frmCategorie.submit()">
    	   <option value="0">Kies een categorie</option>
+       <?=$outputKeuzeCat;?>
        </select>
        </p>
        </form>
            
 <table id ="prodlijst" class='table table-hover' >	   
-<tr><td><img src='images/picto_info1.jpg'></td><td></td></tr>
+<!-- <tr><td><img src='images/picto_info1.jpg'></td><td></td></tr> -->
+ <?=$outputProducten;?>
 </table>
    
 		   </div>
