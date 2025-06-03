@@ -1,0 +1,389 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+background-color:#AFCB07;
+margin-top: 4em;
+margin-bottom: 3em;
+}
+.container {
+background-color: #FFF;	
+}
+.footerback {
+background-color: #006430; /*grijs: #0B0857 - blauw 3B5998*/
+	color: #FFF;
+	padding: 1em;
+	}
+.footerback a {color: inherit;}
+.footerback h1, .footerback h2, .footerback h3, .footerback h4, .footerback h5 {color: inherit;}
+
+.menutitel {
+font-variant: small-caps;
+font-weight: bold;
+color: darkcyan !important;
+margin-top:0.6em;
+margin-bottom:0.2em;
+}
+form.login {
+border: solid 1px darkcyan;
+background-color: beige;
+margin: 0.6em;
+}
+.ddvmarg {
+margin: 0.6em;
+border: solid 1px darkcyan;	
+}	
+.klein {
+font-size: 0.8em;	
+}
+.kleinfont {font-size: 0.8rem;}
+.ddvnopad {
+padding:0;
+}
+.ddvpadleft {
+padding-left: 2em;	
+}
+ul {
+padding-left: 0;
+}
+.row li {
+position: relative;
+left: 1em;
+	padding-left: 0;
+list-style-type: square;
+}
+
+#program td.tabelkop, #program2 td.tabelkop,  #listparticipants td.tabelkop, #conferences td.tabelkop, #list td.tabelkop {
+font-weight: bold;
+color: #B72230;
+font-size: 1em;
+font-style: italic;
+}
+#program td, #listparticipants td {
+margin: 0;
+padding: 0;
+}
+#program td.diklijn, #program2 td.diklijn,  #listparticipants td.diklijn {
+padding-top:0.6em;
+border-top: 2px solid #B72230;	
+}
+.programline {
+border-top: solid 1px #CCC;	
+}
+.alert, .alert1 {
+	color: #F00;
+	font-weight: normal;
+}
+.alert1
+{
+	
+}
+.opvallend {
+color: #B72230;
+font-weight: bold;
+}
+.opvallend1 {
+color: #B72230;
+font-weight: bold;
+}
+.opvallend2 {
+color: #AFCB07;
+font-weight: bold;
+}
+.ddvmargbot
+{
+margin-bottom: 0.8em;
+}
+.hotelbook {
+border: solid 1px darkcyan;
+background-color: beige;
+padding: 0.6em;
+}
+form.hotelbook input {
+width: 90%;	
+}
+form.hotelbook input[type="number"] {
+width: 2em;	
+}
+
+textarea {
+width: 100%;
+margin-top: 0.6em;
+}
+table#prijzen {
+width: 100%;	
+}
+#prijzen td.table_head {
+border-bottom: solid 1px #B72230;
+color: #B72230;
+padding: 5px;	
+}
+.flowright {
+float: right;	
+margin-left: 1em;
+}
+.geenrand {
+border: none 0px;	
+}
+#registersteps {
+background-color: #B72230;
+color: #FFF;
+}
+#registersteps td {
+border: solid 1px #FFF;	
+padding: 2px;
+}
+.registersteps_not {
+background-color: #FFF;	
+color: #B72230;
+}
+
+/*Registerforms*/
+#register td, #register2 td, #register3 td, #register4 td {
+font-size: 1em;	
+}
+/*#cboCountry, #cboTitle, #cboSoftware, #cboOS, #cboPower {
+font-size: 0.9em;		
+}*/
+.asterisk {
+color: #F00;
+font-size: 1.2em;
+font-weight: 500;	
+}
+.separate {
+border-top: solid 1px #B72230;	
+padding-top: 0.3em;
+}
+
+
+/*overgenomen uit 2015*/
+#centraal form {
+	
+border: solid 1px #B72230;
+}
+.kader {
+border: solid 1px #B72230;
+}
+input, select {
+border: solid 1px #006430;
+padding: 0.2em 0.1em;
+color: #003;
+font-weight:600;
+margin-bottom: 2px;
+}
+input[type='email']
+{
+border-radius: 1em;
+background-color: darkorange;
+color: white;	
+padding-left: 1em;
+}
+input[type='email']::placeholder {color: white;}
+
+.breed {
+width: 90%;	
+}
+legend {
+font-weight: bold;
+color: #B72230;
+}
+
+input.aantal {
+border: solid 1px #B72230;
+color: #003;
+font-weight:bold;
+width: 25px;
+margin-bottom: 2px;
+text-align: right;
+}
+input[type="submit"]
+{
+color: #006430;
+font-size: 1em;	
+border-radius: 1em;
+padding-left: 1em;
+padding-right: 1em;
+}
+input[type="submit"]:hover
+{
+background-color: #AFCB07;
+color: white;
+}
+input[type="radio"]
+{
+	margin-left: 1em;
+}
+input[type="radio"]:first-child
+{
+	margin-left: 0em;
+}
+
+.knop {
+	border: solid 1px #B72230;
+	background-color:#336;
+	color: #FFF;
+	text-align: right;
+}
+.alert {
+	color: #F00;
+	font-weight: normal;
+}
+
+#centraal .formknop {
+text-align: right;
+border: none 0px;
+}
+#centraal .formknop input{
+width: 130px;
+border: solid 1px #B72230;
+}
+.rood {border-top: solid 2px #D81812;
+background-color: #D81812;
+color: #FFF;
+}
+.table th,
+.table td {
+  padding-left: 0;
+padding-right: 0;
+padding-top: 0.1rem;
+padding-bottom: 0.1em;
+  vertical-align: middle;
+  border-top: 1px solid #dee2e6;
+}
+
+form#frmSenate {
+padding: 0.5em;	
+border: solid 1px #FF8C00;
+margin: 0;
+}
+
+form#frmSenate legend {
+margin-top: 0.8em;}
+form#frmSenate legend {
+font-size: 1em;
+color: #FF8C00;
+}
+ol {
+list-style-type: decimal;
+}
+.col-lg-4 {
+
+}
+#product {
+	width: 30%;
+	font-size: 0.8em;
+	float: left;
+	margin-right: 1em;
+	margin-bottom: 1em;
+	border: solid 1px #AFCB07;
+	padding: 0.5em;
+	font-size: 0.9em;
+	text-align: center;
+	height: 28em;
+	}
+#product p {
+margin: 0;
+padding: 0;	
+padding-bottom: 1em;
+}
+#product:hover {
+	color: white;
+	background-color: #AFCB07;
+	}
+	#fact {
+		width: 30%;
+		float: left;
+		margin-right: 1em;
+		margin-bottom: 1em;
+		border: solid 1px #AFCB07;
+		padding: 0.5em;
+		font-size: 0.9em;
+		text-align: center;
+		height: 21em;
+		}
+#fact:hover {
+color: white;
+background-color: #AFCB07;
+}
+#clearing {clear: both;}
+#productdetail {
+border: solid 1px #AFCB07;
+padding: 0.5em;
+font-size: 0.8em;	
+}
+#prodlijst {
+width: 70%;
+}
+#prodlijst td {
+border-bottom: solid 1px #AFCB07;
+}
+.hoogte {
+height: 7em;
+vertical-align: top;}
+.backwit {
+background-color: white;	
+}
+.midden {
+text-align:center;
+color: black;
+}
+#foto {
+display: inline-block;	
+width: 50%;
+}
+#details {
+display: inline-block;	
+width: 40%;
+}
+.kleincorps {
+font-size: 0.8em;	
+}
+form.frmLogin {
+margin-top: 1em;
+margin-bottom: 1em;
+border: solid 1px #AFCB07;
+padding: 1em;
+padding-bottom: 0;
+width: 80%;
+margin-left: 1em;
+background-color: #EEE;
+}
+form.frmLogin input[type="submit"] {
+color: #AFCB07;
+padding-left: 1em;
+padding-right: 1em;
+background-color: white;
+}
+.alert {color: red;}
+
+#rechts {text-align: right;}
+
+#prodinfo {
+border: solid 1px #AFCB07;
+padding: 0.5em;
+margin-bottom: 1em;
+}
+#foto {
+float: left;
+width: 30%;
+}
+#info {
+float: right;
+width: 65%;
+}
+.prod {
+color: #AFCB07;
+font-weight: bold;
+font-size: 1.2em;	
+}
+#besteloverzicht td {
+padding-left: 0.4em;
+padding-right: 0.6em;
+border-bottom: solid 1px #AFCB07;	
+}
+#besteloverzicht tr:hover {
+color: white;
+background-color: #AFCB07;
+}
+#prijsaanpassing td {
+	padding-right: 1em;	
+}
