@@ -2,28 +2,29 @@
     include("cnnConnectie.php");
     include("algemeen.php");
 
-    // Alle info ophalen van gekozen product
-    if(isset($_GET['artnr'])) {
-        $artnr = $_GET['artnr'];
-        $sqlinfo = "SELECT * FROM tblproducten WHERE artnr = '$artnr'";
-        $sqlinfoResult = $db->query($sqlinfo) or die(mysql_error());
-        while($product = $sqlinfoResult->fetch_assoc()) {
-            $artnr = $product['artnr'];
-            $naam = $product['product'];
-            $omschrijving = $product['omschrijving'];
-            $prijs = $product['prijs'];
+    // Artnr ophalen
+    $artnr = $_GET["artnr"];
 
-            //aantal bestellingen van dit product ophalen
-            $sqlBestellingen = "SELECT COUNT(*) FROM tblorderlijnen WHERE artikel = '$artnr'";
-            $sqlBestellingenResult = $db->query($sqlBestellingen) or die(mysql_error());
-            $bestellingen = $sqlBestellingenResult->fetch_row();
-            $aantalBestellingen = $bestellingen[0];
+    // Alle informatie ophalen van product
+    $queryProductInfo = "SELECT * FROM tblproducten WHERE artnr = '$artnr'";
+    $queryProductInfoResult = $db->query($queryProductInfo) or die(mysql_error());
+    while($info = $queryProductInfoResult->fetch_assoc()) {
+        $naam = $info["product"];
+        $omschrijving = $info["omschrijving"];
+        $prijs = $info["prijs"];
 
-            
-        }
-    } 
-    else 
-    {
+        // Output opstellen
+        $outputInfoProduct .= "<p class='prod'>$naam</p><p>$omschrijving</p><p><strong>€ $prijs</strong></p>";
+
+        // Ophalen hoeveel stuks er verkocht werden
+        $queryVerkochtAantal = "SELECT COUNT(*) from tblorderlijnen WHERE artikel = '$artnr'";
+        $queryVerkochtAantalResult = $db->query($queryVerkochtAantal) or die(mysql_error());
+        $orders = $queryVerkochtAantalResult->fetch_row();
+        $aantalBestellingen = $orders[0];
+        
+        // Output opstellen
+        $outputAantalStuks = "<p>Reeds <strong>$aantalBestellingen</strong> stuks besteld!</p>";
+
     }
 ?>
 <!DOCTYPE html>
@@ -51,8 +52,11 @@
 
 <div id='prodinfo'>
 <div id='foto'><img src='images/<?=$artnr;?>.jpg'></div>
-<div id='info'><p class='prod'><?=$naam?></p><p><?=$omschrijving;?></p><p><strong>€ <?=$prijs;?></strong></p>
-<p>Reeds <strong><?=$aantalBestellingen;?></strong> stuks besteld!</p>
+<div id='info'>
+<!-- <p class='prod'>product</p><p>omschrijving</p><p><strong>€ XXX</strong></p> -->
+<?=$outputInfoProduct;?>
+<!-- <p>Reeds <strong>XXX</strong> stuks besteld!</p> -->
+<?=$outputAantalStuks;?>
 </div>
     
 <div id='clearing'></div>
