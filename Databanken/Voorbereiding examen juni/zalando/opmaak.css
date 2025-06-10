@@ -1,0 +1,221 @@
+@charset "utf-8";
+*{
+	margin: 0px;
+	padding:0px;
+}
+#wrapper {
+border: solid 1px #AAA;
+margin-left:auto;
+margin-right: auto;
+width: 960px;
+margin-top: 1em;
+}
+body {
+font: Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", serif;
+font-size: 0.8em;	
+}
+#login {
+background-color: #DDD;
+height: 2em;	
+text-align: right;
+padding-right: 2em;
+color: #D42528;
+font-weight: bold;
+}
+#menu {
+float: left;
+width: 15%;	
+padding: 0.5em;
+}
+#menu ul {
+background-color: #DDD;
+list-style-type: none;	
+}
+#menu a {
+text-decoration: none;
+color: #666;	
+}
+#menu li {
+padding-top: 0.4em;
+padding-bottom: 0.4em;
+padding-left: 0.5em;
+border-bottom: solid #BBB 1px;	
+}
+#content {
+float: right;
+width: 80%;	
+padding: 0.5em;
+min-height: 250px;
+}
+#content h1 {
+font-size: 1.2em;
+background-color: #666;
+color: #FFF;
+font-variant: small-caps;
+font-weight: bold;	
+padding: 0.3em;
+margin-bottom: 1em;
+}
+#content p {
+margin-top: 0.3em;
+margin-bottom: 0.3em;	
+}
+#inlog, #registreer {
+width: 45%;
+float: left;	
+}
+footer {
+clear: both;
+height: 1.5em;
+background-color: #DDD;	
+}
+#message, #message1 {
+height: 2em;
+color: #F00;	
+}
+#tblregistreer tr td {
+margin: 1em;	
+}
+input {
+margin-top: 0.2em;
+margin-bottom: 0.2em;	
+padding: 0.1em;
+}
+input[type="date"],input[type="text"],input[type="email"],input[type="password"] {
+width: 90%;	
+}
+input[type="submit"] {color: #C42326; font-weight: bold; padding:0.1em;}
+.horlijn {
+border-bottom: solid 1px #CCC;	
+}
+#categories {
+float: left;
+width= 80%;
+margin-bottom: 1em;	
+}
+#subcat {
+float: left;
+width=18%;	
+}
+#categories ul {
+list-style-type: none;	
+height: 1.2em;
+
+}
+#categories li {
+float: left;
+padding-left: 2em;
+padding-right: 2em;
+padding-top: 0.3em;
+padding-bottom: 0.3em;
+background-color: #CCC;
+margin-right: 0.8em;
+}
+#producten {
+clear: both;	
+margin-top: 2em;
+}
+#product {
+font-size: 1.2em;
+font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;
+float: left;
+width: 30%;
+border: solid 1px #1126A2;
+height: 280px;	
+margin-right: 0.5em;
+margin-bottom: 0.5em;
+padding: 0.5em;
+text-align: center;
+display: table-cell;
+vertical-align: bottom;
+}
+#productfoto {
+font-size: 1.2em;
+font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;
+
+border: solid 1px #1126A2;
+height: 220px;	
+width: 30%;
+margin-right: 0.5em;
+margin-bottom: 0.5em;
+padding: 0.5em;
+text-align: center;
+display: table-cell;
+vertical-align: bottom;
+}
+#foto {
+min-height: 160px;	
+}
+#foto, #cat, #subcat,  #merk, #omschrijving, #prijs {
+float: none;	
+}
+#prijs {
+font-weight: bold;
+font-size: 1.4em;	
+}
+#cat {
+font-weight: bold;	
+}
+.omschrijving {
+font-size: 1.2em;
+font-style: italic;
+margin-bottom: 1em;	
+text-decoration: none;
+color: inherit;
+}
+.stopfloat {
+clear: both;
+text-decoration: none;
+}
+
+a {color: #666;}
+a:hover {
+color: inherit;
+}
+.welcome {
+	line-height: 1.2em;
+	font-size: 1.2em;	
+}
+.floatright {
+float: right;	
+}
+.knop {
+margin-right: 1em;	
+font-size:1.5em;
+padding: 1em;
+}
+.tabellijn {
+border-bottom: solid 1px #C71B1E;
+padding-bottom: 0.1em;	
+padding-top: 0.2em;	
+padding-right: 1em;
+}
+.tabellijn2 {
+border-bottom: solid 1px #C71B1E;
+padding-bottom: 0.1em;	
+padding-top: 0.2em;	
+padding-right: 1em;
+text-align: right;
+}
+.tabellijn3 {
+border-bottom: solid 1px #C71B1E;
+padding-bottom: 0.1em;	
+padding-top: 0.2em;	
+padding-right: 1em;
+padding-left: 1.5em;
+}
+.tabellijn4 {
+padding-bottom: 0.1em;	
+padding-top: 0.2em;	
+padding-right: 1em;
+padding-left: 1.5em;
+}
+.tabeltitel {
+font-size: 1.2em;
+font-weight: bold;	
+}
+.tabeltitel2 {
+font-size: 1.2em;
+font-weight: bold;	
+padding-left:1em;
+}
